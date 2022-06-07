@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.ccphamy.modules.codeless.dao.CodelessAnyQueryDao">
+
+<select id="getDbTableNameList" resultType="com.github.ccphamy.modules.codeless.dto.DbTableInfoDto">
+    SELECT t.table_name, t.table_comment, d.schema_name FROM information_schema.TABLES t, information_schema.SCHEMATA d
+    <where>
+        <if test="prefix != null and prefix != ''">
+            and t.table_name like concat(#{prefix}, '%')
+        </if>
+        <if test="schemaName != null and schemaName != ''">
+            AND  d.schema_name = #{schemaName} and t.table_schema = #{schemaName}
+        </if>
+        ORDER BY create_time desc
+    </where>
+
+</select>
+
+<select id="getDbTableColumnList" resultType="com.github.ccphamy.modules.codeless.dto.DbTableColumnInfoDto">
+    select column_name,column_type,column_comment from information_schema.COLUMNS
+    <where>
+        <if test="tableName != null and tableName != ''">
+            and table_name = #{tableName}
+        </if>
+        <if test="schemaName != null and schemaName != ''">
+            AND table_schema = #{schemaName}
+        </if>
+    </where>
+    ORDER BY ordinal_position
+</select>
+
+<select id="getDataList" resultType="java.util.Map">
+    select * from ${tableName} limit ${limit} offset ${(page - 1) * limit}
+    </select>
+
+    <select id="getDataListSize" resultType="java.lang.Long">
+        select count(1) from ${tableName}
+    </select>
+
+<insert id="genTable">
+    CREATE TABLE `${tableName}` (
+       `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+        <foreach item="comment" index="index" collection="columnComment">
+            `field_${index}` text COMMENT #{comment},
+        </foreach>
+       PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT=#{tableComment};
+    </insert>
+
+<delete id="dropTable">
+    DROP TABLE ${tableName};
+</delete>
+
+<insert id="insertData">
+    insert into `${tableName}` (
+    <foreach collection="data" item="value" index="key" separator=",">
+        ${key}
+    </foreach>
+    )
+    values (
+    <foreach collection="data" item="value" index="key" separator=",">
+        #{value}
+    </foreach>
+    )
+    </insert>
+
+<delete id="removeByIds">
+    delete from `${tableName}` where id in (
+    <foreach collection="ids" item="value" index="key" separator=",">
+        ${value}
+    </foreach>
+    )
+    </delete>
+
+</mapper>

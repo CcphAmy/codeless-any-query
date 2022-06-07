@@ -1,0 +1,7 @@
+/back-end/src/main/resources/application-dev-bakup.yml
+.idea
+back-end/.idea
+Logs
+target
+application-dev.yml
+back-end/src/main/resources/application-dev.yml
