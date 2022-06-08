@@ -1,11 +1,14 @@
 <template>
   <div class="container">
 
-    <div class="box">
-      <div style="height: 40px">
-        <i class="el-icon-star-on"></i>
-        <span style="font-size: 18px;">2022年喵喵哒查询表单</span>
+    <div class="header">
+      <div style="top: 60px;left: 20px;height: 40px;z-index: 10; position: absolute;color: azure;">
+        <i style="font-size: 30px" class="el-icon-star-on"></i>
+        <span style="font-size: 22px;">2022年喵喵哒查询表单</span>
       </div>
+
+    </div>
+    <div class="box">
 
       <div class="item-input">
         <label>真实姓名</label>
@@ -38,11 +41,13 @@
       <div class="submit">
         <el-button class="submit-button" type="primary" round>查询</el-button>
       </div>
+
+
+      <div class="copyright">
+        自动生成查询页面
+      </div>
     </div>
 
-    <div class="copyright">
-      自动生成查询页面
-    </div>
   </div>
 </template>
 
@@ -87,8 +92,30 @@ export default {
   width: 100%;
   overflow: hidden;
   padding: 0;
-  background: #1e96fb;
   height: 100vh;
+}
+
+
+.header {
+  width: 100%;
+  height: 297px;
+  background-color: #1e96fb;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.header::after {
+  background-color: #1e96fb;
+  content: '';
+  width: 220%;
+  height: 314px;
+  position: absolute;
+  left: -60%;
+  top: 0;
+  /*z-index: -1;*/
+  border-radius: 0 0 50% 50%;
 }
 
 .box {
@@ -104,8 +131,13 @@ export default {
   outline: none;
   background: #FFFFFF;
   background-size: 100% auto;
-  /*border-radius: 12px;*/
+  border-radius: 12px;
   padding: 18px 15px 15px 15px;
+  position: absolute;
+  width: calc(100% - 30px);
+  top: 200px;
+  z-index: 10;
+  box-shadow:0 10px 20px 2px rgb(0 0 0 / 10%)
 }
 
 .item-input {
@@ -177,7 +209,7 @@ export default {
   text-align: center;
   overflow: hidden;
   color: #fff;
-  background: #1e96fb;
+  background: #fff;
   width: 25px;
   height: 25px;
   line-height: 25px;
@@ -195,7 +227,7 @@ export default {
   text-align: center;
   overflow: hidden;
   color: #fff;
-  background: #1e96fb;
+  background: #fff;
   width: 25px;
   height: 25px;
   line-height: 25px;
