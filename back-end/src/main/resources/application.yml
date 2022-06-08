@@ -7,7 +7,7 @@ server:
     port: 8088
     connection-timeout: 5000ms
     servlet:
-        context-path: /api
+        context-path: /
 
 debug: false
 

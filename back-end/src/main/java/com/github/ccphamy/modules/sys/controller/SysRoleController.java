@@ -102,7 +102,7 @@ public class SysRoleController extends AbstractController {
      * 修改角色
      */
     @SysLog("修改角色")
-    @PostMapping("/update")
+    @PostMapping("/api/update")
     @RequiresPermissions("sys:role:update")
     @ApiOperation(value = "修改角色",notes = "")
     public R update(@RequestBody SysRoleEntity role) {

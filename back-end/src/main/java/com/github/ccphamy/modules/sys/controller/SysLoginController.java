@@ -37,7 +37,7 @@ public class SysLoginController extends AbstractController {
     /**
      * 验证码
      */
-    @GetMapping("/captcha")
+    @GetMapping("/api/captcha")
     @ApiOperation(value = "获取验证码",notes = "返回验证码图片")
     public void captcha(HttpServletResponse response, @ApiParam(value = "随意填，但每次不得重复", required = true)String uuid) throws IOException {
         response.setHeader("Cache-Control", "no-store, no-cache");
@@ -56,7 +56,7 @@ public class SysLoginController extends AbstractController {
     /**
      * 登录
      */
-    @PostMapping("/sys/login")
+    @PostMapping("/api/sys/login")
     @ApiOperation(value = "登录",notes = "需先获取验证码")
     public Map<String, Object> login(@RequestBody SysLoginForm form) {
         boolean captcha = sysCaptchaService.validate(form.getUuid(), form.getCaptcha());
@@ -85,7 +85,7 @@ public class SysLoginController extends AbstractController {
     /**
      * 退出
      */
-    @PostMapping("/sys/logout")
+    @PostMapping("/api/sys/logout")
     @ApiOperation(value = "退出登录",notes = "")
     public R logout() {
         sysUserTokenService.logout(getUserId());

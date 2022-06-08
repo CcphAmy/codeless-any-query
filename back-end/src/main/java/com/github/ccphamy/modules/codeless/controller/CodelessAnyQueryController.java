@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 @RestController
-@RequestMapping("/codeless/any/query")
+@RequestMapping("/api/codeless/any/query")
 @Api(tags = {"无代码表格"})
 public class CodelessAnyQueryController extends AbstractController {
 

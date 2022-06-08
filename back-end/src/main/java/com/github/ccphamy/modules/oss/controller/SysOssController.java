@@ -33,7 +33,7 @@ import java.util.Objects;
  * @author Mark sunlightcs@gmail.com
  */
 @RestController
-@RequestMapping("/sys/oss")
+@RequestMapping("/api/sys/oss")
 @Api(tags = {"对象存储/文件上传"})
 public class SysOssController {
 

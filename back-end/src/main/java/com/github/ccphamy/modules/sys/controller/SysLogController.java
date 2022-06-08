@@ -21,7 +21,7 @@ import java.util.Map;
  * @author Mark sunlightcs@gmail.com
  */
 @Controller
-@RequestMapping("/sys/log")
+@RequestMapping("/api/sys/log")
 @Api(tags = {"系统日志-管理后台"})
 public class SysLogController {
     @Autowired

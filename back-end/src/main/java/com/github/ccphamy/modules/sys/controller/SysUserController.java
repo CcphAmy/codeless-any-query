@@ -28,7 +28,7 @@ import java.util.Map;
  * @author Mark sunlightcs@gmail.com
  */
 @RestController
-@RequestMapping("/sys/user")
+@RequestMapping("/api/sys/user")
 @Api(tags = {"管理后台用户-管理后台"})
 public class SysUserController extends AbstractController {
     @Autowired

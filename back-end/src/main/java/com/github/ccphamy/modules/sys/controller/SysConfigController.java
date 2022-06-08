@@ -20,7 +20,7 @@ import java.util.Map;
  * @author Mark sunlightcs@gmail.com
  */
 @RestController
-@RequestMapping("/sys/config")
+@RequestMapping("/api/sys/config")
 @Api(tags = {"系统配置信息"})
 public class SysConfigController extends AbstractController {
     @Autowired

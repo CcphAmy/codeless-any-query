@@ -23,7 +23,7 @@ import java.util.Set;
  * @author Mark sunlightcs@gmail.com
  */
 @RestController
-@RequestMapping("/sys/menu")
+@RequestMapping("/api/sys/menu")
 @Api(tags = {"管理后台菜单"})
 public class SysMenuController extends AbstractController {
     @Autowired
