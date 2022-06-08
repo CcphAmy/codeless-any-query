@@ -38,7 +38,7 @@ public class CodelessAnyQueryController extends AbstractController {
     /**
      * 数据库表列表
      */
-    @RequiresPermissions("nocodetable:db:list")
+    @RequiresPermissions("codeless:db:list")
     @GetMapping("/table/list")
     @ApiOperation(value = "数据库表列表", notes = "")
     public R tableList() {
@@ -61,7 +61,7 @@ public class CodelessAnyQueryController extends AbstractController {
     /**
      * 数据库字段列表
      */
-    @RequiresPermissions("nocodetable:db:list")
+    @RequiresPermissions("codeless:db:list")
     @GetMapping("/column/list")
     @ApiOperation(value = "数据库字段列表", notes = "")
     public R columnList(@RequestParam String tableName) {
@@ -73,7 +73,7 @@ public class CodelessAnyQueryController extends AbstractController {
     /**
      * 数据列表
      */
-    @RequiresPermissions("nocodetable:data:list")
+    @RequiresPermissions("codeless:data:list")
     @GetMapping("/data/list")
     @ApiOperation(value = "数据列表", notes = "")
     public R dataList(@RequestParam String tableName, @RequestParam Integer page, @RequestParam Integer limit) {
@@ -91,7 +91,7 @@ public class CodelessAnyQueryController extends AbstractController {
     /**
      * 生成数据库表
      */
-//    @RequiresPermissions("nocodetable:db:create")
+    @RequiresPermissions("codeless:db:create")
     @SysLog("生成数据库表")
     @ApiOperation(value = "生成数据库表", notes = "")
     @PostMapping("/table/create")
@@ -115,7 +115,7 @@ public class CodelessAnyQueryController extends AbstractController {
      */
     @SysLog("删除数据库表")
     @PostMapping("/table/delete")
-//    @RequiresPermissions("nocodetable:db:delete")
+    @RequiresPermissions("codeless:db:delete")
     @ApiOperation(value = "删除数据库表", notes = "")
     public R delete(@RequestParam String tableName) {
         permissionCheck(tableName);
@@ -127,7 +127,7 @@ public class CodelessAnyQueryController extends AbstractController {
     /**
      * 导入数据
      */
-//    @RequiresPermissions("nocodetable:table:import")
+    @RequiresPermissions("codeless:table:import")
     @SysLog("导入数据")
     @ApiOperation(value = "导入数据", notes = "")
     @PostMapping("/table/import")
@@ -165,7 +165,7 @@ public class CodelessAnyQueryController extends AbstractController {
      */
     @SysLog("删除数据")
     @PostMapping("/table/removeByIds")
-//    @RequiresPermissions("program:data:delete")
+    @RequiresPermissions("codeless:data:delete")
     @ApiOperation(value = "删除数据", notes = "")
     public R delete(@RequestBody List<Long> ids, @RequestParam("tableName") String tableName) {
 

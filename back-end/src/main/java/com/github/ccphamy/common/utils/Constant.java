@@ -29,11 +29,6 @@ public class Constant {
     public static final String ASC = "asc";
 
     /**
-     *  请求header中的微信用户端源链接参数
-     */
-    public static final String WX_CLIENT_HREF_HEADER = "wx-client-href";
-
-    /**
      * 菜单类型
      * @author chenshun
      * @email sunlightcs@gmail.com
