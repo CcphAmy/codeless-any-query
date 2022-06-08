@@ -4,7 +4,7 @@
             <div class="site-content">
                 <div class="brand-info">
                     <h2 class="brand-info__text">Codeless-Any-Query</h2>
-                    <p class="brand-info__intro">一款无代码生成简单的业务系统</p>
+                    <p class="brand-info__intro">一款简单的无代码生成业务系统</p>
                 </div>
                 <div class="login-main">
                     <h3 class="login-title">管理员登录</h3>

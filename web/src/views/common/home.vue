@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       input:
-          `# codeless-any-query - 一款无代码生成简单的业务系统`
+          `# codeless-any-query\n一款简单的无代码生成业务系统`
     }
   },
   computed: {
