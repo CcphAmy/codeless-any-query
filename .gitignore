@@ -5,3 +5,5 @@ Logs
 target
 application-dev.yml
 back-end/src/main/resources/application-dev.yml
+back-end/src/main/resources/public
+back-end/src/main/resources/public/index.html

@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import marked from 'marked'
+import { marked } from 'marked'
 
 const rendererMD = new marked.Renderer();
 marked.setOptions({
@@ -18,7 +18,7 @@ marked.setOptions({
   smartypants: false
 })
 export default {
-  data () {
+  data() {
     return {
       input:
           `# codeless-any-query\n一款简单的无代码生成业务系统`

@@ -23,7 +23,7 @@ import java.util.Map;
  * @author Mark sunlightcs@gmail.com
  */
 @RestController
-@RequestMapping("/sys/role")
+@RequestMapping("/api/sys/role")
 @Api(tags = {"管理后台角色"})
 public class SysRoleController extends AbstractController {
     @Autowired
