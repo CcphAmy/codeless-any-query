@@ -17,7 +17,9 @@ public class WebConfig implements WebMvcConfigurer {
 
 
     /**
-     * 增加访问路径
+     * 增加静态访问路径
+     * 本身项目为前后端分离, 支持使用 tomcat 容器
+     * 当前需要将前端项目build至resources/public下, 后续考虑指定外部路径.
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
