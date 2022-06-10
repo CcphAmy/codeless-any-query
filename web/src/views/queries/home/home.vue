@@ -1,55 +1,57 @@
 <template>
 
-  <div class="home-layout">
+  <div class="position: relative;">
 
-    <div class="header">
-    </div>
+    <div class="home-layout">
 
-    <div class="main">
+      <div class="header">
+      </div>
 
-      <div class="row" v-for="(item, index) in groupList ? Math.ceil(groupList.length / 2) : 0" :key="index">
-        <el-row>
-          <el-col :span="1">
-            &nbsp;
-          </el-col>
-          <el-col :span="10">
-            <div class="grid-content">
-              <home-item
-                  @click-item="out"
-                  :id="groupList[index * 2].id"
-                  :name="groupList[index * 2].name"
-                  :description="groupList[index * 2].description"
-                  :icon="groupList[index * 2].icon"></home-item>
-            </div>
-          </el-col>
-          <el-col :span="2">
-            <div class="grid-content">
-              <span class="x-line"></span>
-            </div>
-          </el-col>
-          <el-col :span="10">
-            <div v-if="(index + 1) * 2 <= groupList.length" class="grid-content">
-              <home-item
-                  @click-item="out"
-                  :id="groupList[index * 2 + 1].id"
-                  :name="groupList[index * 2 + 1].name"
-                  :description="groupList[index * 2 + 1].description"
-                  :icon="groupList[index * 2 + 1].icon"></home-item>
-            </div>
-          </el-col>
-          <el-col :span="1">
-            &nbsp;
-          </el-col>
-        </el-row>
+      <div class="main">
 
-        <div v-if="(index + 1) * 2 <= groupList.length" style="margin-top: -10px;">
-          <div class="y-line"></div>
+        <div class="row" v-for="(item, index) in groupList ? Math.ceil(groupList.length / 2) : 0" :key="index">
+          <el-row>
+            <el-col :span="1">
+              &nbsp;
+            </el-col>
+            <el-col :span="10">
+              <div class="grid-content">
+                <home-item
+                    @click-item="out"
+                    :id="groupList[index * 2].id"
+                    :name="groupList[index * 2].name"
+                    :description="groupList[index * 2].description"
+                    :icon="groupList[index * 2].icon"></home-item>
+              </div>
+            </el-col>
+            <el-col :span="2">
+              <div class="grid-content">
+                <span class="x-line"></span>
+              </div>
+            </el-col>
+            <el-col :span="10">
+              <div v-if="(index + 1) * 2 <= groupList.length" class="grid-content">
+                <home-item
+                    @click-item="out"
+                    :id="groupList[index * 2 + 1].id"
+                    :name="groupList[index * 2 + 1].name"
+                    :description="groupList[index * 2 + 1].description"
+                    :icon="groupList[index * 2 + 1].icon"></home-item>
+              </div>
+            </el-col>
+            <el-col :span="1">
+              &nbsp;
+            </el-col>
+          </el-row>
+
+          <div v-if="(index + 1) * 2 <= groupList.length" style="margin-top: -10px;">
+            <div class="y-line"></div>
+          </div>
+
         </div>
 
       </div>
-
     </div>
-
   </div>
 
 </template>
@@ -105,23 +107,52 @@ export default {
   },
   methods: {
     out(id) {
-      this.$router.push({ name: 'queryList', params: { id: id }})
+      // this.$router.push({name: 'queryList', params: {id: id}})
+      this.$router.push(`/query/list/${id}`)
     }
   }
 }
 </script>
 
+<style>
+.home-layout {
+  box-shadow: 0 10px 20px 2px rgb(0 0 0 / 10%);
+}
+</style>
+
 <style lang="scss" scoped>
+@media screen and (min-width: 1000px) {
+  .home-layout {
+    max-width: 600px !important;
+  }
+}
 
 .home-layout {
-  background: #ffffff;
-
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  box-sizing: border-box;
+  font-style: normal;
+  -webkit-tap-highlight-color: transparent;
+  border-width: 0;
+  list-style: none;
+  text-decoration: none;
+  outline: none;
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  height: 100vh;
 
   .header {
     width: 100%;
-    height: 297px;
+    height: 207px;
     background-color: #1e96fb;
-    position: fixed;
+    //position: fixed;
     top: 0;
     left: 0;
     z-index: 1;
@@ -131,21 +162,21 @@ export default {
     background-color: #1e96fb;
     content: '';
     width: 220%;
-    height: 314px;
+    height: 224px;
     position: absolute;
     left: -60%;
     top: 0;
-    /*z-index: -1;*/
+    z-index: 1;
     border-radius: 0 0 50% 50%;
   }
 
   .main {
     position: absolute;
     width: 100%;
-    top: 314px;
+    top: 214px;
     overflow-y: auto;
     padding-top: 55px;
-    height: calc(100% - 315px);
+    height: calc(100% - 215px);
     overflow-x: hidden;
 
     .row {
@@ -202,7 +233,6 @@ export default {
     background: #EDEDED;
     margin-left: 5%;
   }
-
 
 
 }

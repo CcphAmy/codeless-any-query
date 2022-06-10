@@ -17,14 +17,14 @@ const _import = require('./import-views')
 const globalRoutes = [
   { path: '/404', component: () => import('@/views/common/404'), name: '404', meta: { title: '404未找到' } },
   { path: '/login', component: () => import('@/views/common/login'), name: 'login', meta: { title: '登录' } },
-  { path: '/query/home', component: () => import('@/views/queries/home/home'), name: 'queryHome', meta: { title: '主页' } },
-  { path: '/query/list', component: () => import('@/views/queries/list/query-list'), name: 'queryList', meta: { title: '列表' } },
-  { path: '/query/query', component: () => import('@/views/queries/query/query-box'), name: 'queryBox', meta: { title: '查询页面' } }
+  { path: '/', component: () => import('@/views/queries/home/home'), name: 'queryHome', meta: { title: '主页' } },
+  { path: '/query/list/:id', component: () => import('@/views/queries/list/query-list'), name: 'queryList', meta: { title: '列表' } },
+  { path: '/query/query/:id', component: () => import('@/views/queries/query/query-box'), name: 'queryBox', meta: { title: '查询页面' } }
 ]
 
 // 主入口路由(需嵌套上左右整体布局)
 const mainRoutes = {
-  path: '/',
+  path: '/index',
   component: () => import('@/views/main'),
   name: 'main',
   redirect: { name: 'home' },
@@ -87,11 +87,12 @@ router.beforeEach((to, from, next) => {
 /**
  * 判断当前路由类型, global: 全局路由, main: 主入口路由
  * @param {*} route 当前路由
+ * @param globalRoutes
  */
 function fnCurrentRouteType(route, globalRoutes = []) {
   var temp = []
   for (var i = 0; i < globalRoutes.length; i++) {
-    if (route.path === globalRoutes[i].path) {
+    if (route.name === globalRoutes[i].name) {
       return 'global'
     } else if (globalRoutes[i].children && globalRoutes[i].children.length >= 1) {
       temp = temp.concat(globalRoutes[i].children)

@@ -1,53 +1,56 @@
 <template>
-  <div class="container">
 
-    <div class="header">
-      <div style="top: 60px;left: 20px;height: 40px;z-index: 10; position: absolute;color: azure;">
-        <i style="font-size: 30px" class="el-icon-star-on"></i>
-        <span style="font-size: 22px;">2022年喵喵哒查询表单</span>
+  <div class="position: relative;">
+    <div class="container">
+
+      <div class="header">
+        <div style="top: 60px;left: 20px;height: 40px;z-index: 10; position: absolute;color: azure;">
+          <i style="font-size: 30px" class="el-icon-star-on"></i>
+          <span style="font-size: 22px;">2022年喵喵哒查询表单</span>
+        </div>
+
+      </div>
+      <div class="box">
+
+        <div class="item-input">
+          <label>真实姓名</label>
+          <input type="text" name="name" autocomplete="off" placeholder="请输入真实姓名"/>
+        </div>
+
+        <div class="item-input">
+          <label>真实姓名</label>
+          <input type="text" name="name" autocomplete="off" placeholder="请输入真实姓名"/>
+        </div>
+
+        <div class="item-input">
+          <label>真实姓名</label>
+          <input type="text" name="name" autocomplete="off" placeholder="请输入真实姓名"/>
+        </div>
+
+
+        <div style="padding: 30px 0 20px 0">
+          <!--        <span class="circle-left"></span>-->
+          <span class="y-line"></span>
+          <!--        <span class="circle-right"></span>-->
+        </div>
+
+        <div>
+          <span class="tip"><i class="el-icon-warning"></i>注意事项</span>
+          <p style="margin-left:10px;font-size: 13px">1.查询时请注意避免输入首尾空格, 特殊符号.</p>
+        </div>
+
+        <!--      注意事项-->
+        <div class="submit">
+          <el-button class="submit-button" type="primary" round>查询</el-button>
+        </div>
+
+
+        <div class="copyright">
+          自动生成查询页面
+        </div>
       </div>
 
     </div>
-    <div class="box">
-
-      <div class="item-input">
-        <label>真实姓名</label>
-        <input type="text" name="name" autocomplete="off"  placeholder="请输入真实姓名" />
-      </div>
-
-      <div class="item-input">
-        <label>真实姓名</label>
-        <input type="text" name="name" autocomplete="off"  placeholder="请输入真实姓名" />
-      </div>
-
-      <div class="item-input">
-        <label>真实姓名</label>
-        <input type="text" name="name" autocomplete="off"  placeholder="请输入真实姓名" />
-      </div>
-
-
-      <div style="padding: 30px 0 20px 0">
-        <span class="circle-left"></span>
-        <span class="y-line"></span>
-        <span class="circle-right"></span>
-      </div>
-
-      <div>
-        <span class="tip"><i class="el-icon-warning"></i>注意事项</span>
-        <p style="font-size: 13px">1.查询时请注意避免输入首尾空格, 特殊符号.</p>
-      </div>
-
-<!--      注意事项-->
-      <div class="submit">
-        <el-button class="submit-button" type="primary" round>查询</el-button>
-      </div>
-
-
-      <div class="copyright">
-        自动生成查询页面
-      </div>
-    </div>
-
   </div>
 </template>
 
@@ -73,18 +76,25 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (min-width: 1000px) {
+  .container {
+    max-width: 600px !important;
+  }
+}
 
 
 .container {
   position: absolute;
+  margin: auto;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   font-size: 14px;
   font-weight: normal;
   box-sizing: border-box;
   font-style: normal;
   -webkit-tap-highlight-color: transparent;
-  margin: 0;
   border-width: 0;
   list-style: none;
   text-decoration: none;
@@ -93,14 +103,15 @@ export default {
   overflow: hidden;
   padding: 0;
   height: 100vh;
+  box-shadow: 0 10px 20px 2px rgb(0 0 0 / 10%);
 }
 
 
 .header {
   width: 100%;
-  height: 297px;
+  height: 247px;
   background-color: #1e96fb;
-  position: fixed;
+  /*position: fixed;*/
   top: 0;
   left: 0;
   z-index: 1;
@@ -110,11 +121,11 @@ export default {
   background-color: #1e96fb;
   content: '';
   width: 220%;
-  height: 314px;
+  height: 264px;
   position: absolute;
   left: -60%;
   top: 0;
-  /*z-index: -1;*/
+  z-index: 1;
   border-radius: 0 0 50% 50%;
 }
 
@@ -135,9 +146,9 @@ export default {
   padding: 18px 15px 15px 15px;
   position: absolute;
   width: calc(100% - 30px);
-  top: 200px;
+  top: 25%;
   z-index: 10;
-  box-shadow:0 10px 20px 2px rgb(0 0 0 / 10%)
+  box-shadow: 0 10px 20px 2px rgb(0 0 0 / 10%)
 }
 
 .item-input {
@@ -160,6 +171,7 @@ export default {
   padding: 0 3px 0 0;
   margin: 0 0 2px;
 }
+
 .item-input label {
   color: #222222;
   flex-shrink: 0;
@@ -189,9 +201,8 @@ export default {
   content: '';
   position: absolute;
   left: 15px;
-  width: calc(100% - 60px);
-  margin-left: 15px;
-  margin-right: 15px;
+  width: calc(100% - 30px);
+  margin-left: 0;
   height: 1px;
   transform: scaleY(0.5);
   -webkit-transform: scaleY(0.5);
@@ -249,13 +260,18 @@ export default {
 }
 
 .submit-button {
-  width: 80%;height: 44px;font-size: 18px;letter-spacing:2px;font-weight: 400;border-radius: 12px
+  width: 80%;
+  height: 44px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 400;
+  border-radius: 12px
 }
 
 .copyright {
   text-align: center;
-  font-size: .24rem;
+  font-size: 13px;
   color: #97b9fe;
-  padding: 0.35rem 0;
+  padding: 10px 0;
 }
 </style>
