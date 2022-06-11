@@ -9,3 +9,4 @@ logs
 target
 application-dev.yml
 back-end/src/main/resources/public
+back-end/src/main/resources/application-prod.yml

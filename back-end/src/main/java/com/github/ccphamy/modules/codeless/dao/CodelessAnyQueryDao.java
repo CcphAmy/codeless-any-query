@@ -1,5 +1,6 @@
 package com.github.ccphamy.modules.codeless.dao;
 
+import com.github.ccphamy.modules.codeless.dto.DataSearchParamDto;
 import com.github.ccphamy.modules.codeless.dto.DbTableColumnInfoDto;
 import com.github.ccphamy.modules.codeless.dto.DbTableInfoDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -36,16 +37,17 @@ public interface CodelessAnyQueryDao {
      * @param tableName 数据库名称
      * @return list
      */
-    public List<Map<String, Object>> getDataList(@Param("tableName") String tableName, @Param("page") Integer page, @Param("limit") Integer limit);
+    public List<Map<String, Object>> getDataList(@Param("tableName") String tableName,  @Param("search") List<DataSearchParamDto> search, @Param("page") Integer page, @Param("limit") Integer limit);
 
 
     /**
      * 数据返回
      *
      * @param tableName 数据库名称
+     * @param seach 搜索参数
      * @return list
      */
-    public Long getDataListSize(@Param("tableName") String tableName);
+    public Long getDataListSize(@Param("tableName") String tableName, @Param("search") List<DataSearchParamDto> search);
 
 
     /**

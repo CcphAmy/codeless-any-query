@@ -51,12 +51,3 @@ mybatis-plus:
         cache-enabled: true
         call-setters-on-nulls: true
         jdbc-type-for-null: 'null'
-
-renren:
-    # APP模块，是通过jwt认证的，如果要使用APP模块，则需要修改【加密秘钥】
-    jwt:
-        # 加密秘钥
-        secret: kF3`sCax|bD20!2#gE0FS!E3d4WC_W23Ccp_s@kJA0#[ccphamy]
-        # token有效时长，7天，单位秒
-        expire: 604800
-        header: token

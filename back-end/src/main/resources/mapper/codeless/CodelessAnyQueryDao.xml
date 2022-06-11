@@ -30,12 +30,41 @@
     ORDER BY ordinal_position
 </select>
 
+    <sql id="DATA_LIST_WHERE">
+
+            <if test="search != null and search.size > 0">
+                <foreach item="item" index="index" collection="search">
+
+                    <if test="item.fieldName != null and item.fieldName != '' and item.searchValue != null and item.searchValue != '' and item.type != null">
+
+                        <if test="item.type == 'eq'">
+                            and `${item.fieldName}` = #{item.searchValue}
+                        </if>
+
+                        <if test="item.type == 'like'">
+                            and `${item.fieldName}` like concat('%', #{item.searchValue}, '%')
+                        </if>
+                    </if>
+                </foreach>
+            </if>
+
+    </sql>
+
 <select id="getDataList" resultType="java.util.Map">
-    select * from ${tableName} limit ${limit} offset ${(page - 1) * limit}
+    select * from ${tableName}
+    <where>
+        <include refid="DATA_LIST_WHERE">
+        </include>
+    </where>
+    order by id desc limit ${limit} offset ${(page - 1) * limit}
     </select>
 
     <select id="getDataListSize" resultType="java.lang.Long">
         select count(1) from ${tableName}
+        <where>
+            <include refid="DATA_LIST_WHERE">
+            </include>
+        </where>
     </select>
 
 <insert id="genTable">

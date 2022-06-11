@@ -8,6 +8,7 @@ import com.github.ccphamy.common.utils.R;
 import com.github.ccphamy.common.utils.excel.MapExcelUtil;
 import com.github.ccphamy.modules.codeless.dto.DbTableColumnInfoDto;
 import com.github.ccphamy.modules.codeless.service.CodelessAnyQueryService;
+import com.github.ccphamy.modules.codeless.vo.DataListParamVo;
 import com.github.ccphamy.modules.sys.controller.AbstractController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,20 +21,19 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
-
+/**
+ * AQ
+ *
+ * @author ccphamy
+ */
 @RestController
-@RequestMapping("/api/codeless/any/query")
+@RequestMapping("/api/aq")
 @Api(tags = {"无代码表格"})
 public class CodelessAnyQueryController extends AbstractController {
 
     @Resource
     private CodelessAnyQueryService codelessAnyQueryService;
 
-
-    private static final String SCHEMA_NAME = "any_query";
-
-    private final static String PREFIX_SOURCE_NAME = "custom_table_";
 
     /**
      * 数据库表列表
@@ -42,21 +42,9 @@ public class CodelessAnyQueryController extends AbstractController {
     @GetMapping("/table/list")
     @ApiOperation(value = "数据库表列表", notes = "")
     public R tableList() {
-        return R.ok().put("list", codelessAnyQueryService.getDbTableNameList(SCHEMA_NAME, PREFIX_SOURCE_NAME));
+        return R.ok().put("list", codelessAnyQueryService.getDbTableNameList());
     }
 
-
-    private void permissionCheck(String tableName) {
-
-        if (StringUtils.isBlank(tableName)) {
-            throw new RRException("无法访问该表.");
-        }
-
-        String[] prefixArr = {PREFIX_SOURCE_NAME};
-        if (Stream.of(prefixArr).noneMatch(tableName::startsWith)) {
-            throw new RRException("无法访问该表.");
-        }
-    }
 
     /**
      * 数据库字段列表
@@ -65,8 +53,8 @@ public class CodelessAnyQueryController extends AbstractController {
     @GetMapping("/column/list")
     @ApiOperation(value = "数据库字段列表", notes = "")
     public R columnList(@RequestParam String tableName) {
-        permissionCheck(tableName);
-        return R.ok().put("list", codelessAnyQueryService.getDbTableColumnList(SCHEMA_NAME, tableName));
+        codelessAnyQueryService.permissionCheck(tableName);
+        return R.ok().put("list", codelessAnyQueryService.getDbTableColumnList(tableName));
     }
 
 
@@ -74,16 +62,11 @@ public class CodelessAnyQueryController extends AbstractController {
      * 数据列表
      */
     @RequiresPermissions("codeless:data:list")
-    @GetMapping("/data/list")
+    @PostMapping("/data/list")
     @ApiOperation(value = "数据列表", notes = "")
-    public R dataList(@RequestParam String tableName, @RequestParam Integer page, @RequestParam Integer limit) {
-        permissionCheck(tableName);
-        List<?> columnList = codelessAnyQueryService.getDbTableColumnList(SCHEMA_NAME, tableName);
-
-        if (CollectionUtils.isEmpty(columnList)) {
-            return R.error("无法访问该表.");
-        }
-        PageUtils ret = codelessAnyQueryService.getDataList(tableName, page, limit);
+    public R dataList(@RequestBody DataListParamVo listParam, @RequestParam Integer page, @RequestParam Integer limit) {
+        codelessAnyQueryService.permissionCheck(listParam.getTableName());
+        PageUtils ret = codelessAnyQueryService.getDataList(listParam.getTableName(), listParam.getSearch(), page, limit);
         return R.ok().put("page", ret);
     }
 
@@ -106,7 +89,7 @@ public class CodelessAnyQueryController extends AbstractController {
             columnList.add(v);
         });
 
-        codelessAnyQueryService.genTable(PREFIX_SOURCE_NAME + Long.toHexString(System.currentTimeMillis()), tableComment, columnList);
+        codelessAnyQueryService.genTable(tableComment, columnList);
         return R.ok();
     }
 
@@ -118,7 +101,7 @@ public class CodelessAnyQueryController extends AbstractController {
     @RequiresPermissions("codeless:db:delete")
     @ApiOperation(value = "删除数据库表", notes = "")
     public R delete(@RequestParam String tableName) {
-        permissionCheck(tableName);
+        codelessAnyQueryService.permissionCheck(tableName);
         codelessAnyQueryService.dropTable(tableName);
         return R.ok();
     }
@@ -133,9 +116,8 @@ public class CodelessAnyQueryController extends AbstractController {
     @PostMapping("/table/import")
     public R importTableData(@RequestParam("file") MultipartFile file, @RequestParam("tableName") String tableName) throws Exception {
 
-
-        permissionCheck(tableName);
-        List<DbTableColumnInfoDto> columnList = codelessAnyQueryService.getDbTableColumnList(SCHEMA_NAME, tableName);
+        codelessAnyQueryService.permissionCheck(tableName);
+        List<DbTableColumnInfoDto> columnList = codelessAnyQueryService.getDbTableColumnList(tableName);
 
         // 去除id
         for (int i = 0; i < columnList.size(); i++) {
@@ -169,7 +151,7 @@ public class CodelessAnyQueryController extends AbstractController {
     @ApiOperation(value = "删除数据", notes = "")
     public R delete(@RequestBody List<Long> ids, @RequestParam("tableName") String tableName) {
 
-        permissionCheck(tableName);
+        codelessAnyQueryService.permissionCheck(tableName);
 
         if (CollectionUtils.isEmpty(ids)) {
             throw new RRException("没有删除数据");

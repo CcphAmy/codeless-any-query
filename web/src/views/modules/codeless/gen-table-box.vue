@@ -13,6 +13,7 @@
             :on-error="handleError"
             :file-list="fileList"
             :accept="accept"
+            :headers="config"
             :auto-upload="false">
 
           <div slot="trigger">
@@ -72,7 +73,8 @@ export default {
       fileList: [],
       load: false,
       textarea2: '',
-      uploadBox: false
+      uploadBox: false,
+      config: {}
     }
   },
   methods: {
@@ -103,6 +105,7 @@ export default {
     },
     submitUpload() {
       this.tmpAction = `${this.action}?tableComment=` + this.tableComment
+      this.config = this.$http.getToken()
       // load
       this.load = true
       this.$nextTick(() => {
